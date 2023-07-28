@@ -23,18 +23,10 @@ def line_dataset(n=8000):
 
 
 def circle_dataset(n=8000):
-    rng = np.random.default_rng(42)
-    x = np.round(rng.uniform(-0.5, 0.5, n)/2, 1)*2
-    y = np.round(rng.uniform(-0.5, 0.5, n)/2, 1)*2
-    norm = np.sqrt(x**2 + y**2) + 1e-10
-    x /= norm
-    y /= norm
-    theta = 2 * np.pi * rng.uniform(0, 1, n)
-    r = rng.uniform(0, 0.03, n)
-    x += r * np.cos(theta)
-    y += r * np.sin(theta)
-    X = np.stack((x, y), axis=1)
-    X *= 3
+    X = np.zeros((n, 28))
+    X[:] = [-1.,  1.,  1.,  1., -1.,  1.,  1.,  1.,  1.,  1., -1.,  1.,  1.,
+        1., -1.,  1.,  1.,  1., -1., -1., -1.,  1., -1.,  1.,  1., -1.,
+       -1., -1.]
     return TensorDataset(torch.from_numpy(X.astype(np.float32)))
 
 
